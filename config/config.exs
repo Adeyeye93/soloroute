@@ -29,8 +29,10 @@ config :phx_proj, PhxProjWeb.Endpoint,
 #
 # For production it's recommended to configure a different adapter
 # at the `config/runtime.exs`.
-config :phx_proj, PhxProj.Mailer, adapter: Swoosh.Adapters.Local
-
+config :sample, Sample.Mailer,
+  adapter: Swoosh.Adapters.Sendgrid,
+  api_key: "SG.x.x"
+  
 # Configure esbuild (the version is required)
 config :esbuild,
   version: "0.17.11",

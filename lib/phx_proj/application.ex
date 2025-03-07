@@ -10,6 +10,7 @@ defmodule PhxProj.Application do
     children = [
       PhxProjWeb.Telemetry,
       PhxProj.Repo,
+      {PhxProj.Accounts.DigitVerification, []},
       {DNSCluster, query: Application.get_env(:phx_proj, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: PhxProj.PubSub},
       # Start the Finch HTTP client for sending emails
