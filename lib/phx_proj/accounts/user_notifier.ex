@@ -45,6 +45,22 @@ defmodule PhxProj.Accounts.UserNotifier do
     """)
   end
 
+
+  def deliver_invitation_email(email, url) do
+    deliver(email, " You just got an Invitation", """
+      Hi #{email},
+
+      foollow this url to join the organization
+      #{url}
+    """)
+  end
+  def deliver_invitation_added_email(email, org_name) do
+    deliver(email, " You just got an Invitation", """
+      Sending notification email to #{email}
+       that they have been added to #{org_name}
+    """)
+  end
+
   @doc """
   Deliver instructions to reset a user password.
   """

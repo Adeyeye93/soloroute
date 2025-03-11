@@ -11,9 +11,15 @@ defmodule PhxProj.Accounts.User do
     field :hashed_password, :string, redact: true
     field :current_password, :string, virtual: true, redact: true
     field :confirmed_at, :utc_datetime
+    # has_many :organizations, PhxProj.Organizations.Organization
+
+    has_many :member, PhxProj.Organizations.Member, foreign_key: :user_id
+    many_to_many :organizations, PhxProj.Organizations.Organization, join_through: "organization_invitations"
 
     timestamps(type: :utc_datetime)
   end
+
+
 
   @doc """
   A user changeset for registration.

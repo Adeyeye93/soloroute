@@ -67,6 +67,12 @@ defmodule PhxProjWeb.Router do
 
     live_session :require_authenticated_user,
       on_mount: [{PhxProjWeb.UserAuth, :ensure_authenticated}] do
+      live "/organizations", OrganizationLive.Index, :index
+      live "/organizations/new", OrganizationLive.Index, :new
+      live "/organizations/:id/edit", OrganizationLive.Index, :edit
+      live "/organizations/:id/invite", OrganizationLive.Show, :invite
+      live "/organizations/:id", OrganizationLive.Show, :show
+      live "/organizations/:id/show/edit", OrganizationLive.Show, :edit
       live "/users/settings", UserSettingsLive, :edit
       live "/users/settings/confirm_email/:token", UserSettingsLive, :confirm_email
     end
