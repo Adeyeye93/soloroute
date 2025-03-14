@@ -6,8 +6,10 @@ defmodule PhxProj.Organizations do
   import Ecto.Query, warn: false
   alias PhxProj.Repo
 
-  alias PhxProj.Organizations.Organization
-  alias PhxProj.Organizations.OrganizationInvitation
+
+  import Ecto.Changeset
+  alias PhxProj.Organizations.{Organization, OrganizationInvitation}
+  alias PhxProj.Accounts.User
 
   @doc """
   Returns the list of organizations.
@@ -162,10 +164,6 @@ defmodule PhxProj.Organizations do
   #       |> Repo.update()
   #   end
 
-  import Ecto.Changeset
-  alias PhxProj.Repo
-  alias PhxProj.Organizations.{Organization, OrganizationInvitation}
-  alias PhxProj.Accounts.User
 
   @doc """
   Sends an invitation for the given organization. If a user with the given email exists,
@@ -177,6 +175,8 @@ defmodule PhxProj.Organizations do
     - email: the invitee's email,
     - inviter_id: the current user's id sending the invite.
   """
+
+
   def send_invitation(
         %Organization{} = org,
         %{email: email, inviter_id: inviter_id} = invitation_params
@@ -212,7 +212,7 @@ defmodule PhxProj.Organizations do
         if Enum.any?(org.members, &(&1.id == user.id)) do
           {:error, :already_member}
         else
-          updated_members = org.members ++ [user]
+          updated_members = org.members ++ [%PhxProj.Organizations.Member{user_id: user.id}]
 
           org_changeset =
             org
