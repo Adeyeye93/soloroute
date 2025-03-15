@@ -31,7 +31,7 @@ config :phx_proj, PhxProj.Repo,
   # config :my_app, MyAppWeb.Endpoint,
   # url: [host: "example.com", port: 80],
 
-config :my_app, MyAppWeb.Endpoint,
+config :phx_proj, MyAppWeb.Endpoint,
   secret_key_base: System.get_env("SECRET_KEY_BASE")
 
 # Runtime production configuration, including reading
