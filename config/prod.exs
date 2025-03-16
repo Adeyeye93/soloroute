@@ -23,7 +23,7 @@ config :phx_proj, PhxProj.Repo,
   stacktrace: true,
   database: System.get_env("DB_NAME"),
   sslmode: "required",
-  port: 25060,
+  port: System.get_env("DB_PORT"),
   show_sensitive_data_on_connection_error: false,
   pool_size: 10
 
